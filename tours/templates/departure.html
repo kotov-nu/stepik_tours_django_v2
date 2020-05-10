@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block departure %}
+    <h1 class="display-5 mt-4">Летим из <span data-test="from">Новосибирска</span></h1>
+    <p class="mb-4">Найдено <span data-test="tourcount">{{ suitable_tours|length }}</span> туров, от <span
+            data-test="pricemin">{{ min_price }}</span> до
+        <span
+                data-test="pricemax">{{ max_price }}</span> и от <span data-test="nightsmax">{{ nights_from }}</span>
+        ночей до <span
+                data-test="nightsmax">{{ nights_to }}</span> ночей</p>
+
+    <!-- CARDS -->
+    <div class="row mt-5" data-test="cards">
+
+        {% for num, info in suitable_tours.items %}
+            <div class="col-4" data-test="card">
+                <div class="card mb-3">
+                    <img src="{{ info.picture }}" class="card-img-top img-fluid" data-test="picture">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ info.title }}</h5>
+                        <p class="card-text">{{ info.description }}</p>
+                        <a href="/tour/{{ num }}/" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
